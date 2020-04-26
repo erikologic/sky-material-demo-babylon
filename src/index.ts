@@ -6,6 +6,8 @@ import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight";
 import { SphereBuilder } from "@babylonjs/core/Meshes/Builders/sphereBuilder";
 import { GroundBuilder } from "@babylonjs/core/Meshes/Builders/groundBuilder";
 import { StandardMaterial } from "@babylonjs/core/Materials/standardMaterial";
+import { Mesh } from "@babylonjs/core/Meshes/";
+import { SkyMaterial } from '@babylonjs/materials'
 
 // If you don't need the standard material you will still need to import it since the scene requires it.
 // import "@babylonjs/core/Materials/standardMaterial";
@@ -57,6 +59,12 @@ const createScene = (): Scene => {
     groundMaterial.diffuseTexture = new Texture(grassTextureUrl, scene);
 
     ground.material = groundMaterial;
+
+    const skyMaterial = new SkyMaterial("skyMaterial", scene);
+    skyMaterial.backFaceCulling = false;
+
+    const skybox = Mesh.CreateBox("skyBox", 1000.0, scene);
+    skybox.material = skyMaterial;
 
     return scene;
 };
